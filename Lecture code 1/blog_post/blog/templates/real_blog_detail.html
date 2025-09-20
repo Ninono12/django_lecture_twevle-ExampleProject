@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="card-title">{{ blog.title }}</h1>
+            <p class="text-muted">{{ blog.text }}</p>
+
+            {% if blog.banner_image %}
+                <img src="{{ blog.banner_image.image.url }}" alt="{{ blog.title }}" class="img-fluid mt-3 rounded">
+            {% endif %}
+        </div>
+    </div>
+
+    <a href="{% url 'blog_list' %}" class="btn btn-secondary mt-4">← Back to all posts</a>
+</div>
+{% endblock %}

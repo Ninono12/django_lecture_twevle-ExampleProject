@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="mb-3">{{ title }}</h1>
+    <p class="lead">{{ description }}</p>
+
+    <hr class="my-4">
+
+    <h2>Recent Posts</h2>
+    {% if posts %}
+        <ul class="list-group list-group-flush">
+            {% for post in posts %}
+                <li class="list-group-item">
+                    <a href="{% url 'post_detail' post.pk %}">
+                        {{ post.title }}
+                    </a> — <small>{{ post.created_at|date:"M d, Y" }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-muted">No posts yet. Stay tuned!</p>
+    {% endif %}
+    {# Single-line comment #}
+</div>
+{% endblock %}
