@@ -12,7 +12,7 @@ class Author(models.Model):
     def age(self) -> int:
         today = date.today()
         return today.year - self.birth_date.year - (
-                (today.month, today.day) < (self.birth_date.month, self.birth_date.day)
+            (today.month, today.day) < (self.birth_date.month, self.birth_date.day)
         )
 
     def get_blog_posts(self):
@@ -23,20 +23,22 @@ class Author(models.Model):
         verbose_name_plural = "Authors"
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        return f"{self.first_name} {self.last_name}"
 
 
 class BlogPost(models.Model):
     authors = models.ManyToManyField(
-        to='blog.Author', verbose_name='ავტორები', related_name='blog_posts')
-
+        to='blog.Author', verbose_name='ავტორები', related_name='blog_posts'
+    )
     title = models.CharField(verbose_name="სათაური", max_length=255)
-    text = models.TextField(verbose_name="ტექსი")
+    text = models.TextField(verbose_name="ტექსტი")
     active = models.BooleanField(default=True, verbose_name='აქტიურია')
     create_date = models.DateTimeField(
-        verbose_name="შექმნის თარიღი", auto_now_add=True, null=True)
+        verbose_name="შექმნის თარიღი", auto_now_add=True, null=True
+    )
     update_date = models.DateTimeField(
-        verbose_name="განახლების თარიღი", auto_now=True, null=True)
+        verbose_name="განახლების თარიღი", auto_now=True, null=True
+    )
     website = models.URLField(verbose_name='ვებ მისამართი', null=True)
     document = models.FileField(upload_to='blog_document/', null=True, blank=True)
     deleted = models.BooleanField(verbose_name='წაშლილია', default=False)
